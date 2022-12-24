@@ -6,6 +6,9 @@ class LoadingNews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Lottie.asset('assets/loading_app_animation.json', height: 200);
+    return const Padding(
+      padding: EdgeInsets.only(top: 100),
+      child: Center(child: CircularProgressIndicator()),
+    );
   }
 }

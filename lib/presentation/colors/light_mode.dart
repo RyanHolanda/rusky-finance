@@ -12,6 +12,7 @@ ThemeData lightmode() {
       ),
       scaffoldBackgroundColor: Colors.white,
       appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
           elevation: 0,
           titleTextStyle: TextStyle(color: Colors.black)));

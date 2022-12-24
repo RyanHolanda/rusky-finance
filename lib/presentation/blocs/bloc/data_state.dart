@@ -8,10 +8,6 @@ abstract class DataState extends Equatable {
   List<Object> get props => [];
 }
 
-class DataError extends DataState {
-  const DataError({required super.isAppLoading});
-}
-
 class LoadingData extends DataState {
   const LoadingData({required super.isAppLoading});
 }

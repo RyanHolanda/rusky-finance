@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:rusky/data/models/models_lists/models_lists.dart';
-
 import 'package:rusky/presentation/blocs/bloc/data_bloc.dart';
 import 'package:rusky/presentation/views/loadings/global_loading.dart';
 import 'package:rusky/presentation/views/loadings/loading_news.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rusky/presentation/views/screens/bovespa_stocks_screen.dart';
+import 'package:rusky/presentation/views/screens/cryptos_list_screen.dart';
 import 'package:rusky/presentation/widgets/news_list/news_list.dart';
 import 'package:rusky/presentation/widgets/stocks_card_list/stocks_card_list.dart';
 
@@ -67,13 +69,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           children: [
                             const Text(
-                              'BOVESPA',
+                              'B3',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 14),
                             ),
                             const Spacer(),
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          child: const BovespaStocksScreen(),
+                                          type: PageTransitionType
+                                              .rightToLeftWithFade));
+                                },
                                 child:
                                     Text(AppLocalizations.of(context)!.seeMore))
                           ],
@@ -121,7 +130,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             const Spacer(),
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          child: const CryptosScreen(),
+                                          type: PageTransitionType
+                                              .rightToLeftWithFade));
+                                },
                                 child:
                                     Text(AppLocalizations.of(context)!.seeMore))
                           ],
@@ -135,14 +151,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.only(left: 5, right: 15),
                           itemCount: 5,
                           itemBuilder: (BuildContext context, int index) {
-                            return brazilStocks.isEmpty
+                            return top100Cryptos.isEmpty
                                 ? const SizedBox.shrink()
                                 : Padding(
                                     padding: const EdgeInsets.only(left: 10),
                                     child: AssetCard(
-                                        changePercentage: 0,
+                                        changePercentage:
+                                            top100Cryptos[index].priceChange24h,
                                         name: Text(
-                                          'Bitcoin',
+                                          top100Cryptos[index].name,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
@@ -150,8 +167,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   .primaryColor
                                                   .withOpacity(0.2)),
                                         ),
-                                        price: 0,
-                                        symbol: const Text('BTC')),
+                                        price: top100Cryptos[index].price,
+                                        symbol: Text(top100Cryptos[index]
+                                            .symbol
+                                            .toUpperCase())),
                                   );
                           },
                         ),

@@ -11,6 +11,7 @@ ThemeData darkmode() {
     brightness: Brightness.dark,
     bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.black),
     appBarTheme: const AppBarTheme(
+        iconTheme: IconThemeData(color: Colors.white),
         titleTextStyle: TextStyle(color: Colors.white),
         backgroundColor: Color.fromARGB(255, 7, 7, 7),
         elevation: 0),

@@ -67,13 +67,14 @@ class AssetCard extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          'R\$ ${price.toStringAsFixed(2)}',
+                          'R\$ ${price < 10000 ? price.toStringAsFixed(2) : price}',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const Spacer(),
                         Text(
                           '${changePercentage.toStringAsFixed(2)} %',
                           style: TextStyle(
+                              fontSize: 12,
                               color: changePercentage < 0
                                   ? Colors.red
                                   : Colors.green),

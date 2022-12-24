@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:rusky/data/models/models_lists/models_lists.dart';
 import 'package:rusky/data/repos/brazil_repo/stocks_repo.dart';
+import 'package:rusky/data/repos/cryptos_repo/cryptos_repo.dart';
 import 'package:rusky/data/repos/inflation_repo/brazil_inflation_repo.dart';
 import 'package:rusky/data/repos/news_repo/news_repo.dart';
 
@@ -14,6 +15,8 @@ class DataBloc extends Bloc<DataEvent, DataState> {
       emit(const LoadingData(isAppLoading: true));
       final stocks = await GetAllBrazilStocks().getAllBrazilStocks();
       final inflation = await GetBrazilInflation().getBrazillianInflation();
+      final cryptos = await CryptosRepo().getCryptos();
+      top100Cryptos = cryptos;
       brazilInflation = inflation;
       brazilStocks = stocks;
       emit(const DataLoaded(isAppLoading: false));

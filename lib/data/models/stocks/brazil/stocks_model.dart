@@ -4,14 +4,14 @@ class BrazilStocksModel {
   num close;
   num change;
   String? sector;
-  String? logo;
+  String logo;
   BrazilStocksModel({
     required this.stockSymbol,
     required this.companyName,
     required this.close,
     required this.change,
-    this.sector,
-    this.logo,
+    required this.sector,
+    required this.logo,
   });
 
   factory BrazilStocksModel.fromJson(Map<String, dynamic> json) {

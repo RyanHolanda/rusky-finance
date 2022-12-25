@@ -46,7 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
           height: 60,
           child: TextField(
             onChanged: (value) {
-              updateList(value);
+              updateList(value.toLowerCase());
             },
             autofocus: true,
             decoration: InputDecoration(

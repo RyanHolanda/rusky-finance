@@ -8,7 +8,6 @@ import 'package:rusky/presentation/blocs/bloc/data_bloc.dart';
 import 'package:rusky/presentation/colors/dark_mode.dart';
 import 'package:rusky/presentation/colors/light_mode.dart';
 import 'package:rusky/l10n/l10n.dart';
-import 'package:rusky/presentation/views/loadings/global_loading.dart';
 import 'package:rusky/presentation/views/screens/home.dart';
 
 Future<void> main() async {

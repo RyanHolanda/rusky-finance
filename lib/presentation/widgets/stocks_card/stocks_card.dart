@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:rusky/presentation/widgets/stocks_card_list/demo_chart/demo_chart_down.dart';
-import 'package:rusky/presentation/widgets/stocks_card_list/demo_chart/demo_chart_up.dart';
+import 'package:rusky/presentation/widgets/stocks_card/demo_chart/demo_chart_down.dart';
+import 'package:rusky/presentation/widgets/stocks_card/demo_chart/demo_chart_up.dart';
 
 class AssetCard extends StatelessWidget {
   const AssetCard({
+    required this.onPressed,
     required this.changePercentage,
     required this.name,
     required this.price,
@@ -13,6 +14,7 @@ class AssetCard extends StatelessWidget {
 
   final Widget symbol;
   final Widget name;
+  final Function() onPressed;
   final num changePercentage;
   final num price;
 
@@ -35,7 +37,7 @@ class AssetCard extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: onPressed,
             child: Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Column(
@@ -60,8 +62,8 @@ class AssetCard extends StatelessWidget {
                     ),
                   ),
                   changePercentage < 0
-                      ? stockDownDemoChart(context)
-                      : stockUpDemoChart(context),
+                      ? assetDownDemoChart(context)
+                      : assetUpDemoChart(context),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Row(

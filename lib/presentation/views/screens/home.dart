@@ -7,9 +7,10 @@ import 'package:rusky/presentation/views/loadings/global_loading.dart';
 import 'package:rusky/presentation/views/loadings/loading_news.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rusky/presentation/views/screens/bovespa_stocks_screen.dart';
+import 'package:rusky/presentation/views/screens/chart_screen.dart';
 import 'package:rusky/presentation/views/screens/cryptos_list_screen.dart';
 import 'package:rusky/presentation/widgets/news_list/news_list.dart';
-import 'package:rusky/presentation/widgets/stocks_card_list/stocks_card_list.dart';
+import 'package:rusky/presentation/widgets/stocks_card/stocks_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,9 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     context.read<DataBloc>().add(DataEventGetAllStocks());
-    context
-        .read<DataBloc>()
-        .add(const DataEventGetAllNewsData(newsPage: 1, newsLanguage: 'pt'));
+    context.read<DataBloc>().add(DataEventGetAllNewsData());
     super.initState();
   }
 
@@ -101,6 +100,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : Padding(
                                     padding: const EdgeInsets.only(left: 10),
                                     child: AssetCard(
+                                        onPressed: () => Navigator.push(
+                                            context,
+                                            PageTransition(
+                                                child: ChartScreen(
+                                                    assetChange:
+                                                        brazilStocks[index]
+                                                            .change,
+                                                    assetPrice:
+                                                        brazilStocks[index]
+                                                            .close,
+                                                    assetName:
+                                                        brazilStocks[index]
+                                                            .companyName,
+                                                    isCrypto: false,
+                                                    assetSymbol:
+                                                        brazilStocks[index]
+                                                            .stockSymbol),
+                                                type: PageTransitionType
+                                                    .rightToLeftWithFade)),
                                         changePercentage:
                                             brazilStocks[index].change,
                                         name: Text(
@@ -156,6 +174,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : Padding(
                                     padding: const EdgeInsets.only(left: 10),
                                     child: AssetCard(
+                                        onPressed: () => Navigator.push(
+                                            context,
+                                            PageTransition(
+                                                child:
+                                                    ChartScreen(
+                                                        assetChange:
+                                                            top100Cryptos[index]
+                                                                .priceChange24h,
+                                                        assetPrice:
+                                                            top100Cryptos[index]
+                                                                .price,
+                                                        assetName:
+                                                            top100Cryptos[index]
+                                                                .name,
+                                                        isCrypto: true,
+                                                        assetSymbol:
+                                                            top100Cryptos[index]
+                                                                .symbol
+                                                                .toUpperCase()),
+                                                type:
+                                                    PageTransitionType
+                                                        .rightToLeftWithFade)),
                                         changePercentage:
                                             top100Cryptos[index].priceChange24h,
                                         name: Text(

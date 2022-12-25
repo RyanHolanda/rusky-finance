@@ -5,5 +5,6 @@ import 'package:rusky/data/models/stocks/brazil/stocks_model.dart';
 
 List<BrazilStocksModel> brazilStocks = [];
 List<NewsModel> allNewsList = [];
+List<NewsModel> assetNewsList = [];
 List<BrazilInflationModel> brazilInflation = [];
 List<CryptoModel> top100Cryptos = [];

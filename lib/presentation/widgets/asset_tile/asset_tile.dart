@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AssetTile extends StatelessWidget {
   const AssetTile({
+    this.onPressed,
     this.subtitle,
     required this.title,
     this.leading,
@@ -13,6 +14,7 @@ class AssetTile extends StatelessWidget {
   final Widget title;
   final Widget? subtitle;
   final Widget? trailing;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class AssetTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MaterialButton(
-            onPressed: () {},
+            onPressed: onPressed,
             child: ListTile(
               leading: leading,
               title: title,

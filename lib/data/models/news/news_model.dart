@@ -1,27 +1,24 @@
 class NewsModel {
   String title;
   String link;
-  String description;
-  String pubDate;
   String imageUrl;
   String sourceId;
+  String date;
   NewsModel({
+    required this.date,
     required this.title,
     required this.link,
-    required this.description,
-    required this.pubDate,
     required this.imageUrl,
     required this.sourceId,
   });
 
   factory NewsModel.fromJson(Map<String, dynamic> json) {
     return NewsModel(
+      date: json['published_at'] ?? '',
       title: json['title'] ?? '',
-      link: json['link'] ?? '',
-      description: json['description'] ?? '',
-      pubDate: json['pubDate'] ?? '',
+      link: json['url'] ?? '',
       imageUrl: json['image_url'] ?? '',
-      sourceId: json['source_id'] ?? '',
+      sourceId: json['source'] ?? '',
     );
   }
 }

@@ -24,20 +24,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return MaterialApp(
-      theme: lightmode(),
-      darkTheme: darkmode(),
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: L10n.all,
-      debugShowCheckedModeBanner: false,
-      home: BlocProvider(
-        create: (context) => DataBloc(),
-        child: const HomeScreen(),
+    return BlocProvider(
+      create: (context) => DataBloc(),
+      child: MaterialApp(
+        theme: lightmode(),
+        darkTheme: darkmode(),
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: L10n.all,
+        debugShowCheckedModeBanner: false,
+        home: const HomeScreen(),
       ),
     );
   }

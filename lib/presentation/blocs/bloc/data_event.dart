@@ -6,13 +6,17 @@ abstract class DataEvent extends Equatable {
 }
 
 class DataEventGetAllNewsData extends DataEvent {
-  final int newsPage;
-  final String newsLanguage;
-  const DataEventGetAllNewsData({
-    required this.newsPage,
-    required this.newsLanguage,
-  });
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
 
+class DataEventGetAssetsNews extends DataEvent {
+  String assetName;
+  String assetSymbol;
+  DataEventGetAssetsNews({
+    required this.assetSymbol,
+    required this.assetName,
+  });
   @override
   List<Object?> get props => throw UnimplementedError();
 }

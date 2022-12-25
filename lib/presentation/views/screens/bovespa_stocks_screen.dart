@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:rusky/data/models/models_lists/models_lists.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:rusky/presentation/views/screens/chart_screen.dart';
 import 'package:rusky/presentation/views/screens/search_screen.dart';
 import 'package:rusky/presentation/widgets/asset_tile/asset_tile.dart';
 
@@ -36,9 +37,9 @@ class _BovespaStocksScreenState extends State<BovespaStocksScreen> {
                   Navigator.push(
                       context,
                       PageTransition(
-                          child: SearchScreen(isCrypto: false),
-                          type: PageTransitionType.bottomToTopJoined,
-                          childCurrent: widget));
+                        child: const SearchScreen(isCrypto: false),
+                        type: PageTransitionType.bottomToTop,
+                      ));
                 },
                 icon: const Icon(
                   Icons.search,
@@ -127,6 +128,16 @@ class _BovespaStocksScreenState extends State<BovespaStocksScreen> {
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
                   return AssetTile(
+                    onPressed: () => Navigator.push(
+                        context,
+                        PageTransition(
+                            child: ChartScreen(
+                                assetChange: brazilStocks[index].change,
+                                assetPrice: brazilStocks[index].close,
+                                assetName: brazilStocks[index].companyName,
+                                isCrypto: false,
+                                assetSymbol: brazilStocks[index].stockSymbol),
+                            type: PageTransitionType.rightToLeftWithFade)),
                     leading: brazilStocks[index].logo != ''
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(15),

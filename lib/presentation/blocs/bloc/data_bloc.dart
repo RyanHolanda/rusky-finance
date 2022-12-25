@@ -24,10 +24,25 @@ class DataBloc extends Bloc<DataEvent, DataState> {
 
     on<DataEventGetAllNewsData>((event, emit) async {
       emit(const DataLoadingNewNews(isAppLoading: false));
-      final news =
-          await Newsrepo(page: event.newsPage, language: event.newsLanguage)
-              .getNews();
+      final news = await Newsrepo().getNews();
       allNewsList = news;
+      emit(const DataLoadedNewNews(isAppLoading: false));
+    });
+
+    on<DataEventGetAssetsNews>((event, emit) async {
+      emit(const DataLoadingNewNews(isAppLoading: false));
+      final news = await GetAssetNewsrepo(
+              assetName: event.assetName, assetSymbol: event.assetSymbol)
+          .getNews();
+      if (news.isEmpty) {
+        final newsWithSymbol = await GetAssetNewsrepo(
+                assetSymbol: event.assetSymbol, assetName: '')
+            .getNews();
+        assetNewsList = newsWithSymbol;
+      } else {
+        assetNewsList = news;
+      }
+
       emit(const DataLoadedNewNews(isAppLoading: false));
     });
   }

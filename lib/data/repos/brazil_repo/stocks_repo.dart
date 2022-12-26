@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -15,5 +16,25 @@ class GetAllBrazilStocks {
 
       return getAllBrazilStocks();
     }
+  }
+}
+
+
+class GetHistoricalStocksPrice {
+  String symbol;
+    late String url = 'https://brapi.dev/api/quote/$symbol?range=1y&interval=1d&fundamental=false';
+    GetHistoricalStocksPrice({required this.symbol});
+
+  Future getPriceHistory() async {
+    final respose = await http.get(Uri.parse(url));
+    if(respose.statusCode == 200){
+      final List result = jsonDecode(respose.body)['results'][0]['historicalDataPrice'];
+      return result.map((e) => BrazilHistoricalStocksPriceModel.fromJson(e)).toList();
+    } else {
+      print(respose.reasonPhrase);
+      Timer.periodic(const Duration(seconds: 30), (timer) {
+        getPriceHistory();
+      },);
+    } 
   }
 }

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class BrazilStocksModel {
   String stockSymbol;
   String companyName;
@@ -22,6 +23,30 @@ class BrazilStocksModel {
       change: json['change'] ?? 0,
       sector: json['sector'] ?? '',
       logo: json['logo'] ?? '',
+    );
+  }
+}
+
+
+class BrazilHistoricalStocksPriceModel {
+  num close;
+  num open;
+  num high;
+  num low;
+
+  BrazilHistoricalStocksPriceModel({
+    required this.close,
+    required this.open,
+    required this.high,
+    required this.low,
+  });
+
+  factory BrazilHistoricalStocksPriceModel.fromJson(Map<String, dynamic> json) {
+    return BrazilHistoricalStocksPriceModel(
+      open: json['open'] ?? 0,
+      high: json['high'] ?? 0,
+      close: json['close'] ?? 0,
+      low: json['low'] ?? 0
     );
   }
 }

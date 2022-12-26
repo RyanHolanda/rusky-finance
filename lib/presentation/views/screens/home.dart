@@ -87,56 +87,60 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 150,
-                        child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          padding: const EdgeInsets.only(left: 5, right: 15),
-                          itemCount: 5,
-                          itemBuilder: (BuildContext context, int index) {
-                            return brazilStocks.isEmpty
-                                ? const SizedBox.shrink()
-                                : Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: AssetCard(
-                                        onPressed: () => Navigator.push(
-                                            context,
-                                            PageTransition(
-                                                child: ChartScreen(
-                                                    assetChange:
-                                                        brazilStocks[index]
-                                                            .change,
-                                                    assetPrice:
-                                                        brazilStocks[index]
-                                                            .close,
-                                                    assetName:
-                                                        brazilStocks[index]
-                                                            .companyName,
-                                                    isCrypto: false,
-                                                    assetSymbol:
-                                                        brazilStocks[index]
-                                                            .stockSymbol),
-                                                type: PageTransitionType
-                                                    .rightToLeftWithFade)),
-                                        changePercentage:
-                                            brazilStocks[index].change,
-                                        name: Text(
-                                          brazilStocks[index].companyName,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .primaryColor
-                                                  .withOpacity(0.2)),
-                                        ),
-                                        price: brazilStocks[index].close,
-                                        symbol: Text(
-                                            brazilStocks[index].stockSymbol)),
-                                  );
-                          },
-                        ),
-                      ),
+                      state is LoadingData
+                          ? const CircularProgressIndicator()
+                          : SizedBox(
+                              height: 150,
+                              child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                padding:
+                                    const EdgeInsets.only(left: 5, right: 15),
+                                itemCount: 5,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return brazilStocks.isEmpty
+                                      ? const SizedBox.shrink()
+                                      : Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: AssetCard(
+                                              onPressed: () => Navigator.push(
+                                                  context,
+                                                  PageTransition(
+                                                      child: ChartScreen(
+                                                          assetChange:
+                                                              brazilStocks[index]
+                                                                  .change,
+                                                          assetPrice:
+                                                              brazilStocks[index]
+                                                                  .close,
+                                                          assetName:
+                                                              brazilStocks[index]
+                                                                  .companyName,
+                                                          isCrypto: false,
+                                                          assetSymbol:
+                                                              brazilStocks[index]
+                                                                  .stockSymbol),
+                                                      type: PageTransitionType
+                                                          .rightToLeftWithFade)),
+                                              changePercentage:
+                                                  brazilStocks[index].change,
+                                              name: Text(
+                                                brazilStocks[index].companyName,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor
+                                                        .withOpacity(0.2)),
+                                              ),
+                                              price: brazilStocks[index].close,
+                                              symbol: Text(brazilStocks[index]
+                                                  .stockSymbol)),
+                                        );
+                                },
+                              ),
+                            ),
                       Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: Row(
@@ -177,25 +181,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                         onPressed: () => Navigator.push(
                                             context,
                                             PageTransition(
-                                                child:
-                                                    ChartScreen(
-                                                        assetChange:
-                                                            top100Cryptos[index]
-                                                                .priceChange24h,
-                                                        assetPrice:
-                                                            top100Cryptos[index]
-                                                                .price,
-                                                        assetName:
-                                                            top100Cryptos[index]
-                                                                .name,
-                                                        isCrypto: true,
-                                                        assetSymbol:
-                                                            top100Cryptos[index]
-                                                                .symbol
-                                                                .toUpperCase()),
-                                                type:
-                                                    PageTransitionType
-                                                        .rightToLeftWithFade)),
+                                                child: ChartScreen(
+                                                    cryptoId:
+                                                        top100Cryptos[index].id,
+                                                    assetChange:
+                                                        top100Cryptos[index]
+                                                            .priceChange24h,
+                                                    assetPrice: top100Cryptos[index]
+                                                        .price,
+                                                    assetName:
+                                                        top100Cryptos[index]
+                                                            .name,
+                                                    isCrypto: true,
+                                                    assetSymbol:
+                                                        top100Cryptos[index]
+                                                            .symbol
+                                                            .toUpperCase()),
+                                                type: PageTransitionType
+                                                    .rightToLeftWithFade)),
                                         changePercentage:
                                             top100Cryptos[index].priceChange24h,
                                         name: Text(

@@ -35,7 +35,7 @@ class _CryptosScreenState extends State<CryptosScreen> {
                 onPressed: () => Navigator.push(
                     context,
                     PageTransition(
-                      child: SearchScreen(
+                      child: const SearchScreen(
                         isCrypto: true,
                       ),
                       type: PageTransitionType.bottomToTop,
@@ -132,11 +132,12 @@ class _CryptosScreenState extends State<CryptosScreen> {
                         context,
                         PageTransition(
                             child: ChartScreen(
+                                cryptoId: top100Cryptos[index].id,
                                 assetChange:
                                     top100Cryptos[index].priceChange24h,
                                 assetPrice: top100Cryptos[index].price,
                                 assetName: top100Cryptos[index].name,
-                                isCrypto: false,
+                                isCrypto: true,
                                 assetSymbol: top100Cryptos[index].symbol),
                             type: PageTransitionType.rightToLeftWithFade)),
                     leading: top100Cryptos[index].logo != ''
@@ -189,7 +190,7 @@ class _CryptosScreenState extends State<CryptosScreen> {
                             color: top100Cryptos[index].priceChange24h < 0
                                 ? const Color.fromARGB(255, 255, 17, 0)
                                     .withOpacity(0.9)
-                                : Color.fromARGB(255, 20, 204, 26)
+                                : const Color.fromARGB(255, 20, 204, 26)
                                     .withOpacity(0.9),
                             fontWeight: FontWeight.bold,
                             fontSize: 12),

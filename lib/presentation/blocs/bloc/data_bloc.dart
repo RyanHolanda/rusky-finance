@@ -5,7 +5,7 @@ import 'package:rusky/data/repos/brazil_repo/stocks_repo.dart';
 import 'package:rusky/data/repos/cryptos_repo/cryptos_repo.dart';
 import 'package:rusky/data/repos/inflation_repo/brazil_inflation_repo.dart';
 import 'package:rusky/data/repos/news_repo/news_repo.dart';
-
+import 'package:rusky/domain/chart/render_chart.dart';
 part 'data_event.dart';
 part 'data_state.dart';
 
@@ -42,8 +42,26 @@ class DataBloc extends Bloc<DataEvent, DataState> {
       } else {
         assetNewsList = news;
       }
-
       emit(const DataLoadedNewNews(isAppLoading: false));
+    });
+
+    on<DataEventGetAssetHistoriclPrice>((event, emit) async {
+      emit(const LoadingData(isAppLoading: false));
+      if (event.isCrypto == true) {
+        final historicalPrice =
+            await GetHistoricalCryptoPrice(coinId: event.assetID)
+                .getPriceHistory();
+        crypto1yHistoricPrice = historicalPrice;
+        await RenderChart(isCrypto: true).renderChart();
+        emit(const DataLoaded(isAppLoading: false));
+      } else {
+        final historicalPrice =
+            await GetHistoricalStocksPrice(symbol: event.assetID)
+                .getPriceHistory();
+        stock1yHistoricPrice = historicalPrice;
+        await RenderChart(isCrypto: false).renderChart();
+        emit(const DataLoaded(isAppLoading: false));
+      }
     });
   }
 }

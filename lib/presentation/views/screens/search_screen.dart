@@ -4,6 +4,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:rusky/data/models/cryptos/cryptos_models.dart';
 import 'package:rusky/data/models/models_lists/models_lists.dart';
 import 'package:rusky/data/models/stocks/brazil/stocks_model.dart';
+import 'package:rusky/domain/chart/render_chart.dart';
 import 'package:rusky/presentation/views/screens/chart_screen.dart';
 import 'package:rusky/presentation/widgets/asset_tile/asset_tile.dart';
 
@@ -70,24 +71,27 @@ class _SearchScreenState extends State<SearchScreen> {
             : stocksDisplayList.length,
         itemBuilder: (BuildContext context, int index) {
           return AssetTile(
-            onPressed: () => Navigator.push(
-                context,
-                PageTransition(
-                    child: ChartScreen(
-                        assetSymbol: widget.isCrypto
-                            ? cryptosDisplayList[index].symbol
-                            : stocksDisplayList[index].stockSymbol,
-                        assetPrice: widget.isCrypto
-                            ? cryptosDisplayList[index].price
-                            : stocksDisplayList[index].close,
-                        assetChange: widget.isCrypto
-                            ? cryptosDisplayList[index].priceChange24h
-                            : stocksDisplayList[index].change,
-                        isCrypto: widget.isCrypto ? true : false,
-                        assetName: widget.isCrypto
-                            ? cryptosDisplayList[index].name
-                            : stocksDisplayList[index].companyName),
-                    type: PageTransitionType.rightToLeftWithFade)),
+          onPressed: () {
+            chartData.clear();
+            Navigator.push(
+              context,
+              PageTransition(
+                  child: ChartScreen(
+                    cryptoId: widget.isCrypto ? cryptosDisplayList[index].id : '',
+                      assetSymbol: widget.isCrypto
+                          ? cryptosDisplayList[index].symbol
+                          : stocksDisplayList[index].stockSymbol,
+                      assetPrice: widget.isCrypto
+                          ? cryptosDisplayList[index].price
+                          : stocksDisplayList[index].close,
+                      assetChange: widget.isCrypto
+                          ? cryptosDisplayList[index].priceChange24h
+                          : stocksDisplayList[index].change,
+                      isCrypto: widget.isCrypto ? true : false,
+                      assetName: widget.isCrypto
+                          ? cryptosDisplayList[index].name
+                          : stocksDisplayList[index].companyName),
+                  type: PageTransitionType.rightToLeftWithFade));},
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: SizedBox(

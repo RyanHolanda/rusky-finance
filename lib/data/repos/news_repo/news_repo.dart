@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,11 +14,12 @@ class Newsrepo {
     final response = await http.get(Uri.parse(url), headers: _setHeaders());
     if (response.statusCode == 200) {
       final List result = jsonDecode(utf8.decode(response.bodyBytes))['data'];
+      print('getting news');
       return result.map((e) => NewsModel.fromJson(e)).toList();
     } else {
       print('error news');
       print(response.reasonPhrase);
-      return getNews();
+      return [];
     }
   }
 }
@@ -33,14 +35,19 @@ class GetAssetNewsrepo {
   late String url =
       'https://api.thenewsapi.com/v1/news/top?language=pt&api_token=$_apiKey&search=$assetName+$assetSymbol&sort=published_at&categories=business,tech';
 
-  Future<List<NewsModel>> getNews() async {
+  Future getNews() async {
     final response = await http.get(Uri.parse(url), headers: _setHeaders());
     if (response.statusCode == 200) {
       final List result = jsonDecode(utf8.decode(response.bodyBytes))['data'];
+      print('getting news');
       return result.map((e) => NewsModel.fromJson(e)).toList();
     } else {
-      print('error news');
-      return getNews();
+      Timer.periodic(
+        Duration(seconds: 30),
+        (timer) {
+          getNews();
+        },
+      );
     }
   }
 }

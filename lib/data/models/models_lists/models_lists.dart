@@ -8,3 +8,6 @@ List<NewsModel> allNewsList = [];
 List<NewsModel> assetNewsList = [];
 List<BrazilInflationModel> brazilInflation = [];
 List<CryptoModel> top100Cryptos = [];
+List<BrazilHistoricalStocksPriceModel> brazilStockHistoriPrice = [];
+List<BrazilHistoricalStocksPriceModel> stock1yHistoricPrice = [];
+List crypto1yHistoricPrice = [];

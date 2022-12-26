@@ -188,7 +188,7 @@ class _BovespaStocksScreenState extends State<BovespaStocksScreen> {
                             color: brazilStocks[index].change < 0
                                 ? const Color.fromARGB(255, 255, 17, 0)
                                     .withOpacity(0.9)
-                                : Color.fromARGB(255, 20, 204, 26)
+                                : const Color.fromARGB(255, 20, 204, 26)
                                     .withOpacity(0.9),
                             fontWeight: FontWeight.bold,
                             fontSize: 12),

@@ -9,7 +9,7 @@ class BrazilInflationModel {
 
   factory BrazilInflationModel.fromJson(Map<String, dynamic> json) {
     return BrazilInflationModel(
-      inflationRate: json['value'] as String,
+      inflationRate: json['value'] ?? '',
     );
   }
 }

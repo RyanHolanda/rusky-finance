@@ -11,9 +11,9 @@ class DataEventGetAllNewsData extends DataEvent {
 }
 
 class DataEventGetAssetsNews extends DataEvent {
-  String assetName;
-  String assetSymbol;
-  DataEventGetAssetsNews({
+  final String assetName;
+  final String assetSymbol;
+  const DataEventGetAssetsNews({
     required this.assetSymbol,
     required this.assetName,
   });
@@ -22,6 +22,18 @@ class DataEventGetAssetsNews extends DataEvent {
 }
 
 class DataEventGetAllStocks extends DataEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
+
+
+class DataEventGetAssetHistoriclPrice extends DataEvent {
+  final String assetID;
+  final bool isCrypto;
+  const DataEventGetAssetHistoriclPrice({
+    required this.isCrypto,
+    required this.assetID
+  });
   @override
   List<Object?> get props => throw UnimplementedError();
 }

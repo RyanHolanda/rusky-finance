@@ -1,17 +1,20 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:rusky/data/models/models_lists/models_lists.dart';
+import 'package:rusky/domain/chart/render_chart.dart';
 import 'package:rusky/presentation/blocs/bloc/data_bloc.dart';
 import 'package:rusky/presentation/views/loadings/loading_news.dart';
 import 'package:rusky/presentation/views/screens/search_screen.dart';
-import 'package:rusky/presentation/widgets/news_list/news_list.dart';
-import 'package:intl/intl.dart';
+import 'package:rusky/presentation/widgets/asset_chart/asset_chart.dart';
+import 'package:rusky/presentation/widgets/news_list/asset_news.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChartScreen extends StatefulWidget {
   const ChartScreen(
       {super.key,
+      this.cryptoId,
       required this.assetSymbol,
       required this.assetPrice,
       required this.assetChange,
@@ -20,6 +23,7 @@ class ChartScreen extends StatefulWidget {
 
   final String assetSymbol;
   final String assetName;
+  final String? cryptoId;
   final num assetPrice;
   final num assetChange;
   final bool isCrypto;
@@ -31,15 +35,19 @@ class ChartScreen extends StatefulWidget {
 class _ChartScreenState extends State<ChartScreen> {
   @override
   void initState() {
-    print('vtnc');
     context.read<DataBloc>().add(DataEventGetAssetsNews(
         assetName: widget.assetName, assetSymbol: widget.assetSymbol));
+    context.read<DataBloc>().add(DataEventGetAssetHistoriclPrice(
+        isCrypto: widget.isCrypto,
+        assetID:
+            widget.isCrypto ? widget.cryptoId.toString() : widget.assetSymbol));
     super.initState();
   }
 
   @override
   void dispose() {
     assetNewsList.clear();
+    chartData.clear();
     super.dispose();
   }
 
@@ -70,7 +78,7 @@ class _ChartScreenState extends State<ChartScreen> {
             ),
           ),
           body: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             controller: scrollController,
             child: Padding(
               padding: const EdgeInsets.all(20),
@@ -79,7 +87,7 @@ class _ChartScreenState extends State<ChartScreen> {
                 children: [
                   Text(
                     widget.assetName,
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                   Row(
                     children: [
@@ -104,40 +112,31 @@ class _ChartScreenState extends State<ChartScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 300,
-                  ),
-                  Center(
-                    child: Text(
-                      '${AppLocalizations.of(context)!.newsOf} ${widget.assetName}',
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
+                  state is LoadingData
+                      ? const SizedBox(
+                          height: 300,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        )
+                      : AssetChart(
+                          isCrypto: widget.isCrypto,
+                          price: widget.assetPrice,
+                          change: widget.assetChange,
+                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 50, bottom: 25),
+                    child: Center(
+                      child: Text(
+                        '${AppLocalizations.of(context)!.newsOf} ${widget.assetName}',
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 30,
                   ),
                   state is DataLoadingNewNews
                       ? const LoadingNews()
-                      : ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          controller: scrollController,
-                          shrinkWrap: true,
-                          itemCount: assetNewsList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            var inputFormat = DateFormat('yyy-MM-dd');
-                            var inputDate = inputFormat
-                                .parse(assetNewsList[index].date.split('T')[0]);
-                            var outputFormat = DateFormat('dd-MM-yyyy');
-                            var outputDate = outputFormat.format(inputDate);
-                            return NewsTile(
-                                title: assetNewsList[index].title,
-                                source:
-                                    '${assetNewsList[index].sourceId} $outputDate',
-                                newsLink: assetNewsList[index].link,
-                                imageUrl: assetNewsList[index].imageUrl);
-                          },
-                        ),
+                      : AssetNews(scrollController: scrollController),
                 ],
               ),
             ),

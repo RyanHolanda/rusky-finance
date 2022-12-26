@@ -23,6 +23,8 @@ Creating .env file
 
 ![Group 1](https://user-images.githubusercontent.com/86686024/209573572-f9fab842-9442-4c75-96df-d8ed160104da.png)
 
+Just paste your API key in the in the NEWS_API_KEY variable, and now you can run this project!
+
 
 
 ## Download

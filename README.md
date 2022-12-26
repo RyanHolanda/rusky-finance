@@ -14,6 +14,16 @@ I used the Clean Architecture in this app 'cause that's my first time using Clea
 
 I Used Bloc in this project 'cause still is the only state management that I clearly understand, and I like that so much!
 
+## Flutter Developers
+If you want to run this code in your coumputer, you'll only need to add an .env file in the project file, and put your News API key there, the others API, don't have an Key. 
+
+Getting news API Key - visit the https://www.thenewsapi.com/ website, create an account and copy your API Key.
+
+Creating .env file 
+
+![project_scope](https://user-images.githubusercontent.com/86686024/209573071-5f728522-4c2e-4a51-bee7-100f36145073.png)
+
+
 ## Download
 
 This app is Available only in Google Play Store. You can download in this link:

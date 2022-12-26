@@ -31,4 +31,6 @@ Just paste your API key in the in the NEWS_API_KEY variable, and now you can run
 
 ## Download
 
-This app is Available only in Google Play Store. You can download in this link:
+This app is in Review by Google to be launched on Play Store, so if you wanna test it, You can download this app in the release secttions
+
+

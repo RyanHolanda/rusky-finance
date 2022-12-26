@@ -14,8 +14,7 @@ class CryptosRepo {
       final List result = jsonDecode(response.body);
       return result.map((e) => CryptoModel.fromJson(e)).toList();
     } else {
-      print('error geting');
-      Timer.periodic(Duration(seconds: 30), (timer) {
+      Timer.periodic(const Duration(seconds: 30), (timer) {
         getCryptos();
       });
     }
@@ -29,13 +28,12 @@ class GetHistoricalCryptoPrice {
 
   GetHistoricalCryptoPrice({required this.coinId});
   Future getPriceHistory() async {
-    print(coinId);
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final List result = jsonDecode(response.body);
       return result;
     } else {
-      Timer.periodic(Duration(seconds: 30), (timer) {
+      Timer.periodic(const Duration(seconds: 30), (timer) {
         getPriceHistory();
       });
     }

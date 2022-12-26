@@ -4,6 +4,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:rusky/data/models/models_lists/models_lists.dart';
 import 'package:rusky/presentation/blocs/bloc/data_bloc.dart';
 import 'package:rusky/presentation/views/loadings/global_loading.dart';
+import 'package:rusky/presentation/views/loadings/loading_card.dart';
 import 'package:rusky/presentation/views/loadings/loading_news.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rusky/presentation/views/screens/bovespa_stocks_screen.dart';
@@ -87,60 +88,59 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      state is LoadingData
-                          ? const CircularProgressIndicator()
-                          : SizedBox(
-                              height: 150,
-                              child: ListView.builder(
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                padding:
-                                    const EdgeInsets.only(left: 5, right: 15),
-                                itemCount: 5,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return brazilStocks.isEmpty
-                                      ? const SizedBox.shrink()
-                                      : Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: AssetCard(
-                                              onPressed: () => Navigator.push(
-                                                  context,
-                                                  PageTransition(
-                                                      child: ChartScreen(
-                                                          assetChange:
-                                                              brazilStocks[index]
-                                                                  .change,
-                                                          assetPrice:
-                                                              brazilStocks[index]
-                                                                  .close,
-                                                          assetName:
-                                                              brazilStocks[index]
-                                                                  .companyName,
-                                                          isCrypto: false,
-                                                          assetSymbol:
-                                                              brazilStocks[index]
-                                                                  .stockSymbol),
-                                                      type: PageTransitionType
-                                                          .rightToLeftWithFade)),
-                                              changePercentage:
-                                                  brazilStocks[index].change,
-                                              name: Text(
-                                                brazilStocks[index].companyName,
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                    color: Theme.of(context)
-                                                        .primaryColor
-                                                        .withOpacity(0.2)),
-                                              ),
-                                              price: brazilStocks[index].close,
-                                              symbol: Text(brazilStocks[index]
-                                                  .stockSymbol)),
-                                        );
-                                },
-                              ),
-                            ),
+                      SizedBox(
+                        height: 150,
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.only(left: 5, right: 15),
+                          itemCount: 5,
+                          itemBuilder: (BuildContext context, int index) {
+                            return brazilStocks.isEmpty
+                                ? const Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: LoadingCard(),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: AssetCard(
+                                        onPressed: () => Navigator.push(
+                                            context,
+                                            PageTransition(
+                                                child: ChartScreen(
+                                                    assetChange:
+                                                        brazilStocks[index]
+                                                            .change,
+                                                    assetPrice:
+                                                        brazilStocks[index]
+                                                            .close,
+                                                    assetName:
+                                                        brazilStocks[index]
+                                                            .companyName,
+                                                    isCrypto: false,
+                                                    assetSymbol:
+                                                        brazilStocks[index]
+                                                            .stockSymbol),
+                                                type: PageTransitionType
+                                                    .rightToLeftWithFade)),
+                                        changePercentage:
+                                            brazilStocks[index].change,
+                                        name: Text(
+                                          brazilStocks[index].companyName,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColor
+                                                  .withOpacity(0.2)),
+                                        ),
+                                        price: brazilStocks[index].close,
+                                        symbol: Text(
+                                            brazilStocks[index].stockSymbol)),
+                                  );
+                          },
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: Row(
@@ -174,7 +174,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemCount: 5,
                           itemBuilder: (BuildContext context, int index) {
                             return top100Cryptos.isEmpty
-                                ? const SizedBox.shrink()
+                                ? const Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: LoadingCard(),
+                                  )
                                 : Padding(
                                     padding: const EdgeInsets.only(left: 10),
                                     child: AssetCard(

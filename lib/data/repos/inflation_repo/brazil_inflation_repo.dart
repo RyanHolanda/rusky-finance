@@ -14,9 +14,12 @@ class GetBrazilInflation {
       return result.map((e) => BrazilInflationModel.fromJson(e)).toList();
     } else {
       Exception(response.reasonPhrase);
-      Timer.periodic(Duration(seconds: 30), (timer) {
-        getBrazillianInflation();
-      },);
+      Timer.periodic(
+        const Duration(seconds: 30),
+        (timer) {
+          getBrazillianInflation();
+        },
+      );
     }
   }
 }

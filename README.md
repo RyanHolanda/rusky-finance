@@ -13,7 +13,7 @@ I started develop this project to get experience launching apps in the app store
 
 I used the Clean Architecture in this app 'cause that's my first time using Clean Architecture, and I implemented this, to improve and understand how Clean Architecture works in a real project.
 
-##State Management
+## State Management
 
 I Used Bloc in this project 'cause still is the only state management that I clearly understand, and I like that so much!
 

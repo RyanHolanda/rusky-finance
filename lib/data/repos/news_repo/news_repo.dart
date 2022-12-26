@@ -10,16 +10,18 @@ class Newsrepo {
   late String url =
       'https://api.thenewsapi.com/v1/news/top?language=pt&api_token=$_apiKey&categories=business,tech&locale=br&sort=published_at';
 
-  Future<List<NewsModel>> getNews() async {
+  Future getNews() async {
     final response = await http.get(Uri.parse(url), headers: _setHeaders());
     if (response.statusCode == 200) {
       final List result = jsonDecode(utf8.decode(response.bodyBytes))['data'];
-      print('getting news');
       return result.map((e) => NewsModel.fromJson(e)).toList();
     } else {
-      print('error news');
-      print(response.reasonPhrase);
-      return [];
+      Timer.periodic(
+        const Duration(seconds: 30),
+        (timer) {
+          getNews();
+        },
+      );
     }
   }
 }
@@ -39,11 +41,10 @@ class GetAssetNewsrepo {
     final response = await http.get(Uri.parse(url), headers: _setHeaders());
     if (response.statusCode == 200) {
       final List result = jsonDecode(utf8.decode(response.bodyBytes))['data'];
-      print('getting news');
       return result.map((e) => NewsModel.fromJson(e)).toList();
     } else {
       Timer.periodic(
-        Duration(seconds: 30),
+        const Duration(seconds: 30),
         (timer) {
           getNews();
         },

@@ -23,13 +23,12 @@ class AssetChart extends StatelessWidget {
           lineTouchData: LineTouchData(
               touchTooltipData: LineTouchTooltipData(
             getTooltipItems: (touchedSpots) {
-              print(stock1yHistoricPrice[touchedSpots.first.spotIndex].close);
               return [
                 LineTooltipItem(
                     isCrypto
                         ? 'R\$ ${crypto1yHistoricPrice[touchedSpots.first.spotIndex][4].toStringAsFixed(3)}'
                         : 'R\$ ${stock1yHistoricPrice[touchedSpots.first.spotIndex].close.toStringAsFixed(3)}',
-                    TextStyle())
+                    const TextStyle())
               ];
             },
             tooltipBgColor: Theme.of(context).primaryColor.withOpacity(0.2),

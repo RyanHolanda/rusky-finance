@@ -21,7 +21,8 @@ Getting news API Key - visit the https://www.thenewsapi.com/ website, create an 
 
 Creating .env file 
 
-![project_scope](https://user-images.githubusercontent.com/86686024/209573071-5f728522-4c2e-4a51-bee7-100f36145073.png)
+![Group 1](https://user-images.githubusercontent.com/86686024/209573572-f9fab842-9442-4c75-96df-d8ed160104da.png)
+
 
 
 ## Download

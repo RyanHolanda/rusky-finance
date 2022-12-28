@@ -31,6 +31,8 @@ Just paste your API key in the in the NEWS_API_KEY variable, and now you can run
 
 ## Download
 
-This app is in Review by Google to be launched on Play Store, so if you wanna test it, You can download this app in the release secttions
+https://play.google.com/store/apps/details?id=com.rusky.rusky
+
+You can download that in release section or in Google Play Store
 
 

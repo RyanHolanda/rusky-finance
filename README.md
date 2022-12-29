@@ -33,7 +33,7 @@ Just paste your API key in the in the NEWS_API_KEY variable, and now you can run
 
 You can download the APK in release section or you can download from Google Play Store
 
-Google Play Store Link > This application is in review by google and in a few days gonna be on Play Store. Please download from Release Section
+Google Play Store Link > This application is under review by google and in a few days gonna be on Play Store. Please download from Release Section
 
 
 

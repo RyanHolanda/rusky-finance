@@ -31,9 +31,7 @@ Just paste your API key in the in the NEWS_API_KEY variable, and now you can run
 
 ## Download
 
-You can download the APK in release section or you can download from Google Play Store
-
-Google Play Store Link > https://play.google.com/store/apps/details?id=com.rusky.rusky
+You can download the APK in release section!
 
 
 

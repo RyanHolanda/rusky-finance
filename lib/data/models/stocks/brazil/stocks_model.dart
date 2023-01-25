@@ -27,14 +27,15 @@ class BrazilStocksModel {
   }
 }
 
-
 class BrazilHistoricalStocksPriceModel {
+  num date;
   num close;
   num open;
   num high;
   num low;
 
   BrazilHistoricalStocksPriceModel({
+    required this.date,
     required this.close,
     required this.open,
     required this.high,
@@ -43,10 +44,10 @@ class BrazilHistoricalStocksPriceModel {
 
   factory BrazilHistoricalStocksPriceModel.fromJson(Map<String, dynamic> json) {
     return BrazilHistoricalStocksPriceModel(
-      open: json['open'] ?? 0,
-      high: json['high'] ?? 0,
-      close: json['close'] ?? 0,
-      low: json['low'] ?? 0
-    );
+        date: json['date'] ?? 0,
+        open: json['open'] ?? 0,
+        high: json['high'] ?? 0,
+        close: json['close'] ?? 0,
+        low: json['low'] ?? 0);
   }
 }

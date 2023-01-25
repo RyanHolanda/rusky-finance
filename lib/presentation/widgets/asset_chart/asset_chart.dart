@@ -26,12 +26,12 @@ class AssetChart extends StatelessWidget {
               return [
                 LineTooltipItem(
                     isCrypto
-                        ? 'R\$ ${crypto1yHistoricPrice[touchedSpots.first.spotIndex][4].toStringAsFixed(3)}'
-                        : 'R\$ ${stock1yHistoricPrice[touchedSpots.first.spotIndex].close.toStringAsFixed(3)}',
-                    const TextStyle())
+                        ? '${DateTime.fromMillisecondsSinceEpoch(crypto1yHistoricPrice[touchedSpots.first.spotIndex][0]).day}/${DateTime.fromMillisecondsSinceEpoch(crypto1yHistoricPrice[touchedSpots.first.spotIndex][0]).month}/${DateTime.fromMillisecondsSinceEpoch(crypto1yHistoricPrice[touchedSpots.first.spotIndex][0]).year}\n R\$ ${crypto1yHistoricPrice[touchedSpots.first.spotIndex][4].toStringAsFixed(3)}'
+                        : '${DateTime.fromMillisecondsSinceEpoch(stock1yHistoricPrice[touchedSpots.first.spotIndex].date.toInt() * 1000).day}/${DateTime.fromMillisecondsSinceEpoch(stock1yHistoricPrice[touchedSpots.first.spotIndex].date.toInt() * 1000).month}/${DateTime.fromMillisecondsSinceEpoch(stock1yHistoricPrice[touchedSpots.first.spotIndex].date.toInt() * 1000).year}\n R\$ ${stock1yHistoricPrice[touchedSpots.first.spotIndex].close.toStringAsFixed(3)}',
+                    const TextStyle(fontWeight: FontWeight.bold))
               ];
             },
-            tooltipBgColor: Theme.of(context).primaryColor.withOpacity(0.2),
+            tooltipBgColor: Theme.of(context).primaryColor.withOpacity(0.05),
             showOnTopOfTheChartBoxArea: true,
             fitInsideHorizontally: true,
             fitInsideVertically: true,
@@ -42,7 +42,7 @@ class AssetChart extends StatelessWidget {
           maxY: isCrypto
               ? crypto1yHistoricPrice.isEmpty
                   ? 0
-                  : crypto1yHistoricPrice.first[1]
+                  : crypto1yHistoricPrice.first[1] * 1.4
               : stock1yHistoricPrice.isEmpty
                   ? 0
                   : stock1yHistoricPrice.first.high * 1.4,

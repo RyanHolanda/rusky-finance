@@ -1,6 +1,6 @@
 # Rusky - Track your favorite assets
 
-Rusky is an Android Application to track Brazillian and some Cryptocurrencies assets, in this app you can see some news about assets and what's happening with them. You can see the prices historic in the last year from that assset too!
+Rusky is an Android Application to track Brazillian and some Cryptocurrencies assets, in this app you can see some news about assets and what's happening with them. You can also see the prices in the last year
 
 ![Group 4](https://user-images.githubusercontent.com/86686024/209574013-56660122-21ee-4e5d-8b0f-5dcafff0bbd7.png)
 
